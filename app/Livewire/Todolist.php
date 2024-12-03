@@ -10,19 +10,20 @@ class Todolist extends Component
 {
     public $title = 'Todo list';
 
-    #[Validate('required|min:2')] 
     public $todo;
 
     public $todos = [];
 
     public function addTodo()
     {
-        $this->validate();
+        $this->validate([
+            'todo' => 'required|min:2',
+        ]);
 
         $this->todos[] = $this->todo;
 
         TodoAdded::dispatch($this->todos);
-        
+
         $this->todo = '';
 
     }
