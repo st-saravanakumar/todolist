@@ -39,9 +39,4 @@ class TodoAdded implements ShouldBroadcastNow
             new Channel('todos'),
         ];
     }
-
-    public function broadcastAs()
-    {
-        return 'todo.added';  // The name of the broadcast event
-    }
 }
