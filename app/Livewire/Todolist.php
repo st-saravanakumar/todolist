@@ -3,7 +3,8 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Livewire\Attributes\Validate; 
+use Livewire\Attributes\Validate;
+use Livewire\Attributes\On;
 use App\Events\TodoAdded;
 
 class Todolist extends Component
@@ -14,18 +15,20 @@ class Todolist extends Component
 
     public $todos = [];
 
+
     public function addTodo()
     {
         $this->validate([
             'todo' => 'required|min:2',
         ]);
+        TodoAdded::dispatch($this->todo);
+        $this->reset('todo');
+    }
 
-        $this->todos[] = $this->todo;
-
-        TodoAdded::dispatch($this->todos);
-
-        $this->todo = '';
-
+    #[On('echo:todos,TodoAdded')]
+    public function listenForMessage($data) 
+    {
+       $this->todos[] = $data['todo'];
     }
 
     public function render()

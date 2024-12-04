@@ -1,8 +1,7 @@
 import './bootstrap';
-import 'alpinejs';
+import Echo from 'laravel-echo';
 
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-
-Alpine.start();
+window.Echo.channel('todos')
+.listen('.TodoAdded', (event) => {
+    console.log('Received Todos:', event.todos); // Log received todos to the console
+});

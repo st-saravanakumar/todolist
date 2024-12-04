@@ -15,7 +15,7 @@ class TodoAdded implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $todos;
+    public $todo;
 
     /**
      * Create a new event instance.
@@ -23,9 +23,9 @@ class TodoAdded implements ShouldBroadcastNow
      * @param  string  $todo
      * @return void
      */
-    public function __construct($todos)
+    public function __construct($todo)
     {
-        $this->todos = $todos;
+        $this->todo = $todo;
     }
 
     /**
